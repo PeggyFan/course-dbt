@@ -9,7 +9,7 @@
 with events as (
     select * 
     from {{ ref ('stg_postgres__events') }}
-),
+)
 
 , final as (
     select
@@ -22,7 +22,7 @@ with events as (
         ,count(distinct case when event_type = 'add_to_cart' then user_id else null end) as add_to_carts_users
         ,count(distinct case when event_type = 'checkout' then user_id else null end) as checkouts_users
         ,count(distinct case when event_type = 'packaged_shipped' then user_id else null end) as package_shippeds_users
-        , count(distinct case when event_type = 'page_view' then user_id else null end) as page_views_users
+        ,count(distinct case when event_type = 'page_view' then user_id else null end) as page_views_users
     from events
     group by 1,2
 )
