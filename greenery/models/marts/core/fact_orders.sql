@@ -35,9 +35,9 @@ select
     ,o.order_cost
     ,oia.order_quantity
     ,o.shipping_cost
-    ,p.discount as order_discount
+    ,p.discount_pct as order_discount
     ,o.order_total
-    ,o.order_status
+    ,o.status
 
 -- delivery related details
     ,o.shipping_service

@@ -20,4 +20,4 @@ select
     ,country
 from users
 left join addresses
-    on users.address_id = addresses.address_id 
+    on users.address_id = addresses.address_guid 
