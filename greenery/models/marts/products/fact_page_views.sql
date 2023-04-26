@@ -1,5 +1,11 @@
 with activity_daily as (
-    select * from {{ ref('int_sessions_product_daily') }}
+    select product_id
+    , activity_date
+    , sum(add_to_carts_events) as add_to_cart 
+    , sum(page_views_events) as page_view
+    , sum(checkouts_events) as checkout
+    from {{ ref('int_sessions_product_daily') }}
+    group by 1,2
 ),
 
 orders_daily as (
@@ -22,8 +28,9 @@ final as (
         dc.activity_date
         ,dc.product_id
         ,p.product_name
-        ,coalesce(ad.product_page_view,0) product_page_view
-        ,coalesce(ad.product_add_to_cart,0) product_add_to_cart
+        ,coalesce(ad.page_view,0) product_page_view
+        ,coalesce(ad.add_to_cart,0) product_add_to_cart
+        ,coalesce(ad.checkout,0) product_checkout
         ,coalesce(od.orders,0) as orders
         ,coalesce(od.units,0) as order_units
         ,coalesce(od.units * p.price,0) as order_revenue
