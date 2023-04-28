@@ -1,4 +1,4 @@
-1. What is our overall conversion rate?
+##### 1. What is our overall conversion rate?
 I made modifications to my intermediate table by adding session granularity and look at whether a session contains a specific type of event. Then I was able to use this table to calculate overall and product-level conversion rates.
 
 Overall conversion rate is 62.4%
@@ -30,7 +30,7 @@ from t1
 group by 1
 ```
 
-##### Which products had their inventory change from week 2 to week 3? 
+##### 6. Which products had their inventory change from week 2 to week 3? 
 
 ```
 select *
