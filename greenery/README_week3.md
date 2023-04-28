@@ -6,7 +6,7 @@ Overall conversion rate is 62.4%
 ```
 with t1 as (
 select session_id,
-boolor_agg(checkouts_events)::int as checkouts
+boolor_agg(checkout)::int as checkouts
 from int_sessions_product_daily
 group by 1
 )
@@ -19,7 +19,7 @@ for product level:
 with t1 as (
 select product_id
 , session_id
-, boolor_agg(checkouts_events)::int as checkouts
+, boolor_agg(checkout)::int as checkouts
 from int_sessions_product_daily
 group by 1,2
 )
