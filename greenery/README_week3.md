@@ -29,3 +29,12 @@ product_id
 from t1 
 group by 1
 ```
+
+##### Which products had their inventory change from week 2 to week 3? 
+
+```
+select *
+from products_snapshot
+where dbt_valid_to is not null
+and dbt_valid_from > '2023-04-17'
+```

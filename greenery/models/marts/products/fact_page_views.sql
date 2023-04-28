@@ -1,9 +1,10 @@
+
 with activity_daily as (
     select product_id
     , activity_date
-    , sum(add_to_carts_events) as add_to_cart 
-    , sum(page_views_events) as page_view
-    , sum(checkouts_events) as checkout
+    , sum(add_to_cart) as add_to_cart 
+    , sum(page_view) as page_view
+    , sum(checkout) as checkout
     from {{ ref('int_sessions_product_daily') }}
     group by 1,2
 ),
@@ -15,6 +16,9 @@ orders_daily as (
 products as (
     select * from {{ ref('dim_products') }}
 ),
+
+
+
 
 -- to ensure all site and order daily product activities/orders are accounted for
 dates_combo as (
