@@ -4,13 +4,16 @@ with order_products as (
 
 , product_orders_agg as (
     select
-        oi.product_id
-        ,o.created_at as order_date
-        ,count(distinct o.order_id) as orders
-        ,sum(oi.quantity) as units
-        ,sum(case when p.promo_id is not null then 1 else 0 end) as promo_orders
+        product_id
+        ,product_name
+        ,order_date
+        ,count(distinct user_id) as users
+        ,count(distinct order_id) as orders
+        ,sum(quantity) as units
+        ,sum(case when discount_pct is not null then 1 else 0 end) as promo_orders
+        ,sum(revenue) as revenue
     from order_products
-    group by 1,2
+    group by 1,2,3
 )
 
 select 

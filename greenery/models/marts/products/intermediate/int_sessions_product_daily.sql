@@ -6,13 +6,12 @@
     )
 }}
 
-{% set event_types = dbt_utils.get_column_values(table=ref('stg_postgres__events'), column='event_type') %}
+{% set event_types = dbt_utils.get_column_values(
+    table=ref('stg_postgres__events'), 
+    column='event_type') 
+%}
 
-with events as (
-    select * 
-    from {{ ref ('stg_postgres__events') }}
-)
-, user_product_sessions as (
+with user_product_sessions as (
     select 
         e.session_id
         , e.user_id
@@ -23,7 +22,7 @@ with events as (
         {% for event_type in event_types %}
         , {{ sum_of('e.event_type', event_type) }} as {{ event_type }}
         {% endfor %}
-    from events e
+    from {{ ref ('stg_postgres__events') }} e
     left join {{ ref('int_user_order_products') }} op 
         on op.order_id = e.order_id
     group by 1, 2, 3
