@@ -12,8 +12,9 @@ promos as (
 
 order_items_agg as (
     select 
-    order_id,
-    sum(quantity) as order_quantity
+    order_id
+    , sum(quantity) as order_quantity
+    , count(distinct product_id) as distinct_products
     from order_items
     group by 1
 )
@@ -34,6 +35,7 @@ select
 -- order related details
     ,o.order_cost
     ,oia.order_quantity
+    ,oia.distinct_products
     ,o.shipping_cost
     ,p.discount_pct as order_discount
     ,o.order_total

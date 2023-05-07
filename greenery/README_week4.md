@@ -1,4 +1,5 @@
-Part 1. 
+##### Part 1. 
+
 <details>
 <summary>Query</summary>
 ```
@@ -12,9 +13,9 @@ SELECT
  AND s1.dbt_valid_to = s2.dbt_valid_from
 	WHERE s2.dbt_valid_to is null
     and s2.dbt_valid_from >= '2023-04-24'
- 
 ```
 </details>
+
 | change_date | product_name | CHANGED_FROM | CHANGED_TO |
 | --- | --- | --- | --- |
 | 2023-04-28T17:07:44.54Z | Philodendron | 25  | 15  |
@@ -25,7 +26,8 @@ SELECT
 | 2023-04-28T17:07:44.54Z | Monstera | 64  | 50  |
 
 Pothos and String of Pearls sold out at the end of week 3.
-Looking at the changes in inventory in the last three weeks, products that appear more than once has higher volatility: `String of pearls`, `Pothos`, `Philodendron`, and `Monstera`.
+Looking at the changes in inventory in the last three weeks, products that appear more than once has higher volatility: `String of pearls`, `Pothos`, `Philodendron`, and `Monstera`
+
 | change_date | product_name | CHANGED_FROM | CHANGED_TO | DIFFERENCE |
 | --- | --- | --- | --- | --- |
 | 2023-04-28T17:07:44.54Z | Bamboo | 56  | 44  | 12  |
@@ -39,4 +41,22 @@ Looking at the changes in inventory in the last three weeks, products that appea
 | 2023-04-24T23:25:12.069Z | String of pearls | 58  | 10  | 48  |
 | 2023-04-28T17:07:44.54Z | ZZ Plant | 89  | 53  | 36  |
 
-Part 2.
+
+##### Part 2. 
+[My Sigma workbook link](https://app.sigmacomputing.com/corise-dbt/workbook/Greenery-Key-Metrics-Peggy-1znWjIcpugYjIjWzTx6x9a?:nodeId=NtleSMgmoH)
+
+##### Part 3A.
+We used dbt at the very basic level, so this course has given me a lot to think about in terms of data modeling
+and the macros/jinjas that opened door to writing more streamlined queries.
+The yaml files allow for many configurations that could help orchestrate jobs
+
+##### Part 3B.
+I will probably use airflow or dbt Cloud (if budget permits).
+I will schedule a hourly run of the tables to make sure everything is working as expected (traffic, number of orders placed, etc).
+
+Metadata I would be interested in
+* run time
+* configuration settings
+* error messages
+* table and schema used
+The metadata will help me troubleshoot any bottleneck in the models and failures so we can address issues promptly.

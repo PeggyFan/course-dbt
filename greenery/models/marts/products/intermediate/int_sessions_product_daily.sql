@@ -16,6 +16,7 @@ with user_product_sessions as (
         e.session_id
         , e.user_id
         , coalesce(e.product_id, op.product_id) as product_id
+        , pr.product_name
         , min(e.created_at)::date as activity_date
         , min(e.created_at) AS session_started_ts_utc
         , max(e.created_at) AS session_ended_ts_utc
@@ -25,7 +26,9 @@ with user_product_sessions as (
     from {{ ref ('stg_postgres__events') }} e
     left join {{ ref('int_user_order_products') }} op 
         on op.order_id = e.order_id
-    group by 1, 2, 3
+    left join  {{ ref ('stg_postgres__products') }} pr 
+        on coalesce(e.product_id, op.product_id) = pr.product_id
+    group by 1, 2, 3, 4
 )
 
 select {{ dbt_utils.generate_surrogate_key([
