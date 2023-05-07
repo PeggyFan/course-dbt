@@ -15,4 +15,6 @@ SELECT order_id
 , estimated_delivery_at
 , delivered_at
 , status
+, min(created_at::date) over() as min_order_date
+, max(created_at::date) over() as max_order_date
 FROM {{ source('postgres', 'orders') }}
