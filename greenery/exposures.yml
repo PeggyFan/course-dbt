@@ -1,0 +1,25 @@
+version: 2
+
+exposures:
+
+  - name: greenery_key_metrics
+    label: Greenery Key Metrics              # optional, new in dbt Core v1.3
+    type: dashboard                         # required
+    maturity: high                          # optional
+    url: https://app.sigmacomputing.com/corise-dbt/workbook/Greenery_Key_Metrics-1znWjIcpugYjIjWzTx6x9a/edit?:nodeId=uYSGprbp9o       # optional
+    description: >                          # optional
+      Key metrics 
+
+    depends_on:                             # expected
+      - ref('fact_orders')
+      - ref('fact_product_sessions')
+      - ref('int_orders_product_daily')
+      - ref('products_snapshot')
+      - ref('stg_postgres__orders')
+
+
+      name: Peggy Fan
+      email: data@greenery.com
+
+
+      
